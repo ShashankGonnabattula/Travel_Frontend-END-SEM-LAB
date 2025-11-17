@@ -2,7 +2,7 @@ name: CI/CD React App
 
 on:
   push:
-    branches: [master]
+    branches: [main]
 
 permissions:
   contents: write  
@@ -36,5 +36,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           npm install -g gh-pages
-          # Use dist folder (Vite)
           gh-pages -d dist -r https://x-access-token:${GITHUB_TOKEN}@github.com/ShashankGonnabattula/Travel_Frontend-END-SEM-LAB.git
