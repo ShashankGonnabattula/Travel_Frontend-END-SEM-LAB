@@ -2,12 +2,12 @@ name: CI/CD React App
 
 on:
   push:
-    branches: [master]
+    branches: [main]          # <-- change to main
   pull_request:
-    branches: [master]
+    branches: [main]
 
 permissions:
-  contents: write  
+  contents: write
 
 jobs:
   build-and-deploy:
@@ -31,18 +31,15 @@ jobs:
       - name: Build the project
         run: npm run build
 
-      # Configure Git identity
       - name: Configure Git
         run: |
           git config --global user.name "ShashankGonnabattula"
-          git config --global user.email "shashank160306@gmail.com"
+          git config --global user.email "venkat192333@gmail.com"
 
-      # Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          git config --global user.name "ShashankGonnabattula"
-          git config --global user.email "shashank160306@gmail.com"
           npm install -g gh-pages
-          gh-pages -d dist -r https://x-access-token:${GITHUB_TOKEN}@github.com/ShashankGonnabattula/Travel_Frontend-END-SEM-LAB.git
+          # if your build folder is "build", use -d build
+          gh-pages -d build -r https://x-access-token:${GITHUB_TOKEN}@github.com/ShashankGonnabattula/Travel_Frontend-END-SEM-LAB.git
